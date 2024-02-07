@@ -74,8 +74,8 @@ static mosq_sock_t spare_sock = INVALID_SOCKET;
 
 void net__broker_init(void)
 {
-	spare_sock = socket(AF_INET, SOCK_STREAM, 0);
 	net__init();
+	spare_sock = socket(AF_INET, SOCK_STREAM, 0);
 #ifdef WITH_TLS
 	net__init_tls();
 #endif
