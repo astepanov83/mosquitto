@@ -78,9 +78,16 @@ void __stdcall service_main(DWORD dwArgc, LPTSTR *lpszArgv)
 		memset(conf_path, 0, sizeof(conf_path));
 		rc = GetEnvironmentVariable("MOSQUITTO_DIR", conf_path, MAX_PATH);
 		if(!rc || rc == MAX_PATH){
-			service_status.dwCurrentState = SERVICE_STOPPED;
-			SetServiceStatus(service_handle, &service_status);
-			return;
+			rc = GetModuleFileName(NULL, conf_path, MAX_PATH);
+			if (!rc || rc == MAX_PATH) {
+				service_status.dwCurrentState = SERVICE_STOPPED;
+				SetServiceStatus(service_handle, &service_status);
+				return;
+			}
+
+			while (rc > 0 && conf_path[rc] != '/' && conf_path[rc] != '\\')
+				--rc;
+			conf_path[rc] = 0;
 		}
 		strcat(conf_path, "/mosquitto.conf");
 
