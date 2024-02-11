@@ -2217,8 +2217,7 @@ int config__read_file(struct mosquitto__config *config, bool reload, const char 
 
 	fptr = mosquitto__fopen(file, "rt", false);
 	if(!fptr){
-		log__printf(NULL, MOSQ_LOG_ERR, "Error: Unable to open config file %s.", file);
-		return 1;
+		return 0;
 	}
 
 	buflen = 1000;
