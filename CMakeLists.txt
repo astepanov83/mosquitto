@@ -14,7 +14,9 @@ list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/")
 
 add_definitions (-DCMAKE -DVERSION=\"${VERSION}\")
 
-if(NOT WIN32)
+if(WIN32)
+    add_compile_options(/wd4244 /wd4996 /wd4267 /wd4101 /wd4133)
+else()
     add_compile_options(-Wno-deprecated-declarations -Wno-format-nonliteral)
 endif()
 
