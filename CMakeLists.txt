@@ -14,6 +14,10 @@ list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/")
 
 add_definitions (-DCMAKE -DVERSION=\"${VERSION}\")
 
+if(NOT WIN32)
+    add_compile_options(-Wno-deprecated-declarations -Wno-format-nonliteral)
+endif()
+
 if (WIN32)
 	add_definitions("-D_CRT_SECURE_NO_WARNINGS")
 	add_definitions("-D_CRT_NONSTDC_NO_DEPRECATE")
