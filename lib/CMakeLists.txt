@@ -1,3 +1,7 @@
+if(NOT WIN32)
+  add_compile_options(-fvisibility=default)
+endif()
+
 option(WITH_LIB_CPP "Build C++ library?" ON)
 if (WITH_LIB_CPP)
 	add_subdirectory(cpp)
