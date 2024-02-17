@@ -218,5 +218,5 @@ if (UNIX)
 	endif (APPLE)
 endif (UNIX)
 
-install(TARGETS mosquitto RUNTIME DESTINATION "${CMAKE_INSTALL_SBINDIR}")
+install(TARGETS mosquitto RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")
 install(FILES ../include/mosquitto_broker.h ../include/mosquitto_plugin.h DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
