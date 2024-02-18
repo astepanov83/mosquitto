@@ -67,6 +67,7 @@ endif (WITH_SOCKS)
 option(WITH_SRV "Include SRV lookup support?" OFF)
 
 option(WITH_STATIC_LIBRARIES "Build static versions of the libmosquitto/pp libraries?" OFF)
+option(WITH_SHARED_LIBRARIES "Build shared versions of the libmosquitto/pp libraries?" ON)
 option(WITH_PIC "Build the static library with PIC (Position Independent Code) enabled archives?" OFF)
 
 option(WITH_THREADING "Include client library threading support?" ON)
