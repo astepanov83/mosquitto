@@ -507,8 +507,11 @@ int main(int argc, char *argv[])
 	 * This requires the user to ensure that all certificates, log locations,
 	 * etc. are accessible my the `mosquitto` or other unprivileged user.
 	 */
+
+#if 0
 	rc = drop_privileges(&config);
 	if(rc != MOSQ_ERR_SUCCESS) return rc;
+#endif
 
 	if(config.daemon){
 		mosquitto__daemonise();
