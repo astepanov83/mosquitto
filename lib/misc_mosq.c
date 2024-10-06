@@ -94,6 +94,28 @@ FILE *mosquitto__fopen(const char *path, const char *mode, bool restrict_read)
 			if (SetEntriesInAclA(1, &ea, NULL, &pacl) != ERROR_SUCCESS) {
 				return NULL;
 			}
+
+			const char USERS_GROUP_SID[] = "S-1-5-32-545";
+			PSID usersGroupSid;
+			if (!ConvertStringSidToSidA(USERS_GROUP_SID, &usersGroupSid)) {
+				return NULL;
+			}
+
+			char usersGroupName[UNLEN + 1];
+			DWORD usersGroupNameLength = UNLEN;
+			char domainName[UNLEN + 1];
+			DWORD domainNameLength = UNLEN;
+			SID_NAME_USE peUse;
+
+			if (!LookupAccountSidA(NULL, usersGroupSid, usersGroupName, &usersGroupNameLength, domainName, &domainNameLength, &peUse)) {
+				return NULL;
+			}
+
+			EXPLICIT_ACCESS_A eu;
+			BuildExplicitAccessWithNameA(&eu, usersGroupName, GENERIC_READ, SET_ACCESS, NO_INHERITANCE);
+			if (SetEntriesInAclA(1, &eu, NULL, &pacl) != ERROR_SUCCESS) {
+				return NULL;
+			}
 			if (!SetSecurityDescriptorDacl(&sd, TRUE, pacl, FALSE)) {
 				LocalFree(pacl);
 				return NULL;
