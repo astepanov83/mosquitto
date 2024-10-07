@@ -113,7 +113,7 @@ FILE *mosquitto__fopen(const char *path, const char *mode, bool restrict_read)
 
 			EXPLICIT_ACCESS_A eu;
 			BuildExplicitAccessWithNameA(&eu, usersGroupName, GENERIC_READ, SET_ACCESS, NO_INHERITANCE);
-			if (SetEntriesInAclA(1, &eu, NULL, &pacl) != ERROR_SUCCESS) {
+			if (SetEntriesInAclA(1, &eu, pacl, &pacl) != ERROR_SUCCESS) {
 				return NULL;
 			}
 			if (!SetSecurityDescriptorDacl(&sd, TRUE, pacl, FALSE)) {
